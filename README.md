@@ -20,7 +20,7 @@ This app is created as part of the Udacity Nanodegree
 3. Check your python version by _python -v_
 
 4. Start local sever
-    -For Python2    _python -m SimpleHTTPServer 8000_
-    -For Python3    _python -m http.server 8000_
+    - For Python2    _python -m SimpleHTTPServer 8000_
+    - For Python3    _python -m http.server 8000_
 
 5. Visit _http://localhost:8000_
