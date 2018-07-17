@@ -1,7 +1,7 @@
-var cache_Name='site-v1';
+var cache_Name='v1';
 var urls= [
     '/',
-	'/sw_registration',
+	'/sw_registration.js',
 	'/index.html',
 	'/restaurant.html',
 	'/css/styles.css',
@@ -17,9 +17,8 @@ var urls= [
 	'/img/9.jpg',
 	'/img/10.jpg',
 	'/js/dbhelper.js',
-	'/js/main.js',
-	'/js/restaurant_info.js'
-
+	'/js/restaurant_info.js',
+	'/js/main.js'
 ];
 
 self.addEventListener('install', function(event) {
@@ -32,12 +31,12 @@ self.addEventListener('install', function(event) {
 	);
 });
 
+
 self.addEventListener('fetch', function(event) {
 	event.respondWith(
 		caches.match(event.request)
 		.then(function(response) {
 			if (response) {
-				console.log('it response');
 				return response;
 			}
 			return fetch(event.request);
@@ -51,7 +50,7 @@ self.addEventListener('activate', function(event) {
 	event.waitUntil(
        caches.keys().then(function(cacheNames) {
        	return Promise.all(
-       		cacheNames.map(function(cacheName) {
+       		cache_Name.map(function(cacheName) {
        			if (cachesList.indexOf(cacheName)=== -1) {
        				return caches.delete(cacheName);
        			    }
