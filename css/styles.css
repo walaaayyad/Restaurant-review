@@ -327,9 +327,69 @@ nav h1 a {
 }
 
 /*==================== Responsiveness ===================*/
-/* For Small Screen: (Galaxy S5) */
+/*
+============  For iphon 5/SE  ===============
+*/
 
-@media only screen and (max-width:640px){
+@media only screen and (max-width:568px){
+nav {
+  width: 350px;
+}
+#map {
+  height: 356px;
+  width: 340px;
+}
+.filter-options {
+  height: 185px;
+  background-color: #144a6f;
+}
+.filter-options select {
+height: 65px;
+width: 285px;
+margin: 2px;
+margin-left: 0px;
+}
+#restaurants-list {
+  flex-direction: column;
+  padding: 0px;
+}
+
+
+#restaurants-list li {
+  margin: 2px;
+}
+#footer {
+  width: 288px;
+}
+.inside #map-container {
+  height: 300px;
+  width: 100%;
+  position: absolute;
+  top : 115px;
+}
+#breadcrumb {
+  width: calc(100% - 80px);
+}
+#restaurant-container {
+  padding: 440px 11px 30px;
+  width: 330px;
+}
+#restaurant-name {
+  font-size: 18pt;
+}
+#reviews-container {
+  padding: 0px 10px 40px;
+  width: 300px;
+  margin-top: 20px;
+}
+.inside #footer {
+  width: 270px;
+}
+
+}
+/* ==============   For Galaxy S5  ================== */
+
+@media only screen and (min-width: 569px) and (max-width:640px){
 
 #map {
   height: 300px;
