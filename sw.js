@@ -1,9 +1,8 @@
-var cache_Name='v1';
 var urls= [
-    '/',
-	'/sw_registration.js',
-	'/index.html',
-	'/restaurant.html',
+    './',
+	'./sw_registration.js',
+	'./index.html',
+	'./restaurant.html',
 	'/css/styles.css',
 	'/data/restaurants.json',
 	'/img/1.jpg',
@@ -23,7 +22,7 @@ var urls= [
 
 self.addEventListener('install', function(event) {
 	event.waitUntil(
-        caches.open(cache_Name)
+        caches.open('v1')
         .then(function(cache) {
         	console.log('opened cache');
         	return cache.addAll(urls);
@@ -32,25 +31,12 @@ self.addEventListener('install', function(event) {
 });
 
 
-self.addEventListener('fetch', function(event) {
-	event.respondWith(
-		caches.match(event.request)
-		.then(function(response) {
-			if (response) {
-				return response;
-			}
-			return fetch(event.request);
-		    }
-	    )
-    );
-});
-
 self.addEventListener('activate', function(event) {
 	var cachesList = ['page-static-v1', 'blogPosts-static-v1'];
 	event.waitUntil(
        caches.keys().then(function(cacheNames) {
        	return Promise.all(
-       		cache_Name.map(function(cacheName) {
+       		cacheNames.map(function(cacheName) {
        			if (cachesList.indexOf(cacheName)=== -1) {
        				return caches.delete(cacheName);
        			    }
@@ -59,3 +45,17 @@ self.addEventListener('activate', function(event) {
         })
 	);
 });
+
+self.addEventListener('fetch', function(event) {
+	event.respondWith(
+		caches.match(event.request)
+		.then(function(resp) {
+				return resp || fetch(event.request).then(function(response) {
+					return caches.open('v1').then(function(cache) {
+						cache.put(event.request,response.clone());
+						return response;
+					});
+				});
+		    })
+	    );
+    });
